@@ -16,42 +16,46 @@ gasolina = Convert.ToDecimal(Console.ReadLine());
 // decimal gasolina1 = Convert.ToDecimal(Console.ReadLine());
 
 
-decimal percentual = PercentualEtanolGasolina(etanol, gasolina);
-string escolha = ValeAPena(etanol, gasolina);
+decimal percentual = PercentualEtanolGasolina(etanol, gasolina); //prim etanol
 
-Console.WriteLine($"\nPreço do Etanol corresponde a {percentual:N1}% do preço da gasolina\n");
-Console.WriteLine($"Recomendamos abastecer com: {escolha}\n\n");
+Console.WriteLine($"\nPreço do etanol corresponde a {percentual:N1}% do preço da gasolina\n");
+Console.Write("Recomendamos abastecer com ");
+
+Console.ForegroundColor = ConsoleColor.Green;
+Console.WriteLine(ValeAPena(etanol, gasolina) ? "GASOLINA" : "ETANOL");
+//operador ternário                           |            |
+//                                        se for vd      se n
+Console.ResetColor();
 
 
 // decimal percentualTeste = PercentualEtanolGasolina(etanol1, gasolina1);
-// string escolhaTeste = ValeAPena(gasolina1, etanol1);
+// string escolhaTeste = ValeAPena(etanol1, gasolina1) ? "GASOLINA" : "ETANOL";
 
 // Console.WriteLine($"Percentual teste {percentualTeste:N1}%\n");
-// Console.WriteLine($"Recomendamos abastecer com: {escolhaTeste}\n\n");
+// Console.WriteLine($"Recomendamos abastecer com {escolhaTeste}\n\n");
 
 
 
 
-static decimal PercentualEtanolGasolina(decimal a, decimal b) 
-//Variáveis atribuidas respectivamente
+decimal PercentualEtanolGasolina(decimal e, decimal g) 
+//Variáveis atribuidas respectivamente nos parâmetros
 //especifique qual valor vai ser retornado
 
-//void - Execução de tarefa, não retorna resultado
 //escolher o tipo da variável a ser retornada
 {
-    return 100 * a / b;
+    return 100 * e / g;
 }
 
-static string ValeAPena (decimal a, decimal b)
+bool ValeAPena (decimal et, decimal ga) //PRECISA SER BOOLEANO
 //utiliza as variáveis que eu escolher quando for exibir???
 {
-    if(100 * a / b > 73)//teria como n repetir a equação? Como chamar a subrotina a cima???
+    if (PercentualEtanolGasolina(et, ga) > 73)
     {
-        return "Gasolina";
+        return true; //gasolina
     }
 
     else
     {
-        return "Etanol";
+        return false; //etanol
     }
 }
