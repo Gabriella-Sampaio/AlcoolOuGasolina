@@ -2,19 +2,10 @@
 
 decimal etanol, gasolina;
 
-Console.Write("Digite o perço do Etanol (R$)   : ");
-etanol = Convert.ToDecimal(Console.ReadLine());
+Console.WriteLine("-- Etanol ou Gasolina? --\n\n");
 
-Console.Write("Digite o perço da Gasolina (R$) : ");
-gasolina = Convert.ToDecimal(Console.ReadLine());
-
-
-// Console.Write("Teste etanol 1 : ");
-// decimal etanol1 = Convert.ToDecimal(Console.ReadLine());
-
-// Console.Write("teste gasolina 2 : ");
-// decimal gasolina1 = Convert.ToDecimal(Console.ReadLine());
-
+etanol = ValorDigitado("Digite o preço do Etanol (R$)   : ");
+gasolina = ValorDigitado("Digite o preço da Gasolina (R$) : ");
 
 decimal percentual = PercentualEtanolGasolina(etanol, gasolina); //prim etanol
 
@@ -28,14 +19,21 @@ Console.WriteLine(ValeAPena(etanol, gasolina) ? "GASOLINA" : "ETANOL");
 Console.ResetColor();
 
 
-// decimal percentualTeste = PercentualEtanolGasolina(etanol1, gasolina1);
-// string escolhaTeste = ValeAPena(etanol1, gasolina1) ? "GASOLINA" : "ETANOL";
+decimal ValorDigitado (string mensagem)
+{
+    Console.Write(mensagem);
 
-// Console.WriteLine($"Percentual teste {percentualTeste:N1}%\n");
-// Console.WriteLine($"Recomendamos abastecer com {escolhaTeste}\n\n");
+    decimal val;
+    while (!Decimal.TryParse(Console.ReadLine(), out val))
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("\nValor inválido, tente novamente");
+        Console.ResetColor();
 
-
-
+        Console.Write(mensagem);
+    }
+    return val;
+}
 
 decimal PercentualEtanolGasolina(decimal e, decimal g) 
 //Variáveis atribuidas respectivamente nos parâmetros
@@ -47,7 +45,6 @@ decimal PercentualEtanolGasolina(decimal e, decimal g)
 }
 
 bool ValeAPena (decimal et, decimal ga) //PRECISA SER BOOLEANO
-//utiliza as variáveis que eu escolher quando for exibir???
 {
     if (PercentualEtanolGasolina(et, ga) > 73)
     {
